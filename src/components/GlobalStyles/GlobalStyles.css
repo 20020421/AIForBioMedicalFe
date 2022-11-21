@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@100;400&display=swap');
 
 :root {
-    --primary: #8355e5;
+    --primary: #F75A63;
     --secondary: #cde1f8;
     --hover-btn: #5028a8;
 
@@ -34,10 +34,12 @@ body {
 
     overflow-y: overlay;
     scroll-behavior: smooth;
+    background-color: #F6F9FF;
 }
 
 a {
     text-decoration: none;
+    color: #000000;
 }
 
 ul,
