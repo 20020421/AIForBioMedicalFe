@@ -9,5 +9,7 @@ export  const images = {
     image6: require('./image6.png'),
     image7: require('./image7.png'),
     image8: require('./image8.png'),
+    diagnosticLung: require('./diagnostic-lung.webp'),
+
 
 }

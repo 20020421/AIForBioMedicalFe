@@ -8,7 +8,6 @@ const cx = classNames.bind(style);
 
 function NavBarItem({data}) {
 
-    console.log(data)
 
     return ( <div className={cx('wrapper')}>
         <Link to={data.to} className={cx('container')}>

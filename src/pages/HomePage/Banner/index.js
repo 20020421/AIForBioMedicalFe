@@ -8,7 +8,7 @@ function Banner() {
     return ( <div className={cx('banner-wrapper')}>
         <div className={cx('banner-container')}>
             <img className={cx('banner-image')} src={images.banner} alt='banner' />
-            <span className={cx('healthcare-text')}>HealthCare</span>
+            <span className={cx('healthcare-text')}>AI for <span className='text-primary'>BioMedical</span> Images</span>
             <img className={cx('banner-sm-image', 'img1')} src={images.image1} alt='banner-sm-img' />
             <img className={cx('banner-sm-image', 'img2')} src={images.image2} alt='banner-sm-img' />
             <img className={cx('banner-sm-image', 'img3')} src={images.image3} alt='banner-sm-img' />

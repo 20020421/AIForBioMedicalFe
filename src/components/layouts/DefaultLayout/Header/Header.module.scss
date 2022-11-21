@@ -4,12 +4,24 @@
     display: flex;
     align-items: center;
     z-index: 99;
+    // position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    &.fixed {
+        top: 0;
+        left: 0;
+        background-color: var(--white);
+        animation: headerOver .5s linear;
+    }
     
 
     .container {
-        width: 100%;
+        width: 80%;
         display: flex;
         justify-content: space-between;
+        margin: auto;
 
         .logo {
             height: 40px;
@@ -58,5 +70,14 @@
             }
             
         }
+    }
+}
+
+@keyframes headerOver {
+    from {
+        height: 0px;
+    }
+    to {
+        height: 80px;
     }
 }

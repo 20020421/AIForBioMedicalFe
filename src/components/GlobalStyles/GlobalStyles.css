@@ -106,3 +106,8 @@ html *::-webkit-scrollbar-track {
         animation: none !important;
     }
 }
+
+
+.text-primary {
+    color: var(--primary);
+}

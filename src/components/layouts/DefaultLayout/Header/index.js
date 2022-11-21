@@ -1,6 +1,7 @@
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { images } from "../../../../assets/images";
 import style from './Header.module.scss';
@@ -36,8 +37,27 @@ const nav = [
 
 function Header() {
 
-    console.log(images.logo)
-    return ( <div className={cx('wrapper')}>
+    const [isOver, setIsOver] = useState(window.scrollY >= 100);
+
+    const headerRef = useRef(null);
+
+ 
+
+    useEffect(() => {
+        const over = () => {
+            if (headerRef.current !== null) {
+                if (window.scrollY >= headerRef.current.clientHeight) {
+                    setIsOver(true); 
+                } else {
+                    setIsOver(false)
+                }
+            }
+        }
+        window.addEventListener('scroll', over);
+
+        return () =>  window.removeEventListener('scroll', over);
+    }, [])
+    return ( <div ref={headerRef} className={cx('wrapper', [isOver ? 'fixed' : ''])}>
         <div className={cx('container')}>
             <Link to='/' className={cx('logo')}>
                 <img src={images.logo} alt='logo' />
