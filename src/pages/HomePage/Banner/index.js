@@ -6,7 +6,7 @@ const cx = classNames.bind(style);
 
 function Banner() {
     return ( <div className={cx('banner-wrapper')}>
-        <div className={cx('banner-container')}>
+        <div className={cx('container')}>
             <img className={cx('banner-image')} src={images.banner} alt='banner' />
             <span className={cx('healthcare-text')}>AI for <span className='text-primary'>BioMedical</span> Images</span>
             <img className={cx('banner-sm-image', 'img1')} src={images.image1} alt='banner-sm-img' />
