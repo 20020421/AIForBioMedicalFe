@@ -32,9 +32,9 @@ function NavBarItem({data}) {
 
 function SubItem({data}) {
     return (
-        <div className={cx('sub-item')}>
-            <Link to={data.to}><span>{data.title}</span></Link> 
-        </div>
+
+            <Link className={cx('sub-item')} to={data.to}><span>{data.title}</span></Link> 
+
     )
 }
 
