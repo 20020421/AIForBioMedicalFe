@@ -19,7 +19,7 @@ const features = [
         title: 'Chẩn đoán xương',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tortor at risus viverra adipiscing at in. Ornare quam viverra orci sagittis eu. Sed vulputate odio ut enim blandit volutpat. Facilisis leo vel fringilla est ullamcorper eget. Vitae congue eu consequat onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tortor at risus viverra adipiscing at in. Ornare quam viverra orci sagittis eu. Sed vulputate odio ut enim blandit volutpat. Facilisis leo vel fringilla est ullamcorper eget. Vitae congue eu consequat ',
         symbol: faXRay,
-        to: '/ai-for-biomedical-images/lung',
+        to: '/ai-for-biomedical-images/bone',
     }
 ]
 
