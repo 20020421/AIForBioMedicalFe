@@ -9,9 +9,11 @@
 
     padding: 20px;
 
-    box-shadow: 0 10px 10px ;
+    box-shadow: 7px 0 60px rgba(0,0,0,.05);
     height: calc(99vh - 94px);
     min-width: 250px;
+    background-color: var(--white);
+
 
     .header {
         color: var(--primary);
@@ -26,45 +28,144 @@
         padding-left: 10px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        // gap: 10px;
         padding-top: 20px;
         width: 100%;
+        gap: 10px;
 
         .sidebaritem-wrapper {
-            padding: 5px 0px;
             // background-color: var(--primary);
             cursor: pointer;
             transition: color .2s ease-out;
+            user-select: none;
 
-            &:hover {
-                color: var(--primary);
+
+            &.isChose {
+                .sidebar-parent {
+                    .sidebaritem-info {
+                        
+                        .sidebaritem-title {
+                            font-weight: 700;
+                        }
+                        
+                        .icon {
+                            color: var(--black);
+                        }
+
+
+                    }
+                    // .icon-open {
+                    //     transform: rotate(-180deg);
+                    // }
+                }
+                
+
             }
-            
-            .sidebaritem-container {
+
+           
+
+            .sidebar-parent {
+                padding: 10px 5px;
+                border-radius: 9px;
+                width: 100%;
                 display: flex;
                 justify-content: space-between;
-                padding-right: 5px;
                 align-items: center;
+                transition: background-color .3s ease-out;
+                span, .icon, .icon-open {
+                    transition: all .2s ease-out;
+                }
+                &:hover {
+                    span, .icon, .icon-open {
+                        color: var(--primary) !important;
+                    }
+                    background-color: #b9686c5b;
+    
+                    
+                }
 
+                .icon-open.rotate {
+                    transform: rotate(-180deg);
+                }
 
-            .sidebaritem-info {
-                display: flex;
-                flex-direction: row;
+                
+            }
+
+            
+            .sidebar-parent {
+
+                .sidebaritem-info {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                    align-items: center;
+                    width: 100%;
+                    
+                    .icon {
+                        font-size: 2rem;
+                        color: rgba(0, 0, 0, 0.507);
+                    }
+                    span {
+                        font-size: 1.7rem;
+                        font-weight: 400;
+                    }
+
+                }
+                .icon-open {
+                    font-size: 1.1rem;
+                    color: rgba(0, 0, 0, 0.459)
+                }
+            }
+        }
+
+        .sub-items {
+            height: 0px;
+            overflow: hidden;
+
+            // position: absolute;
+            background-color: var(--white);
+            top: 100%;
+            left: -5px;
+            width: 100%;
+            padding-left: 19px;
+            transition: height .2s ease-in;
+            position: relative;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                width: 3px;
+                height: 100%;
+                background-color: var(--primary);
+                border-radius: 10px;
+            }
+
+            &.open {
+                display: inline-flex;
+                flex-direction: column;
+                height: auto;
                 gap: 10px;
-                align-items: center;
-                .icon {
-                    font-size: 2rem;
-                }
-                span {
-                    font-size: 1.7rem;
-                    font-weight: 400;
+            }
+
+            .sub-item {
+                padding: 5px;
+                // background-color: blue;
+                display: flex;
+                justify-content: flex-start;
+                padding-left: 20px;
+                align-items: center ;
+
+                &.sub-chose {
+                    background-color: #b9686c1e;
+
                 }
 
-            }
-            .icon-open {
-                font-size: 1.1rem;
-                color: rgba(0, 0, 0, 0.459)
-            }
+                &:hover {
+                    background-color: #b9686c1e;
+                }
             }
         }
 
