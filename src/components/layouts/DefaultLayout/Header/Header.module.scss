@@ -1,6 +1,6 @@
 .wrapper {
     width: 100%;
-    height: 94px;
+    height: var(--header-height);
     display: flex;
     align-items: center;
     z-index: 99;
@@ -11,13 +11,7 @@
     box-shadow: 0 .46875rem 2.1875rem rgba(4,9,20,.03),0 .9375rem 1.40625rem rgba(4,9,20,.03),0 .25rem .53125rem rgba(4,9,20,.05),0 .125rem .1875rem rgba(4,9,20,.03);
     background-color: var(--white);
 
-    &.fixed {
-        top: 0;
-        left: 0;
-        
-        animation: headerOver .1s ease-in;
-    }
-    
+
 
     .container {
         width: 80%;

@@ -82,6 +82,7 @@ function SideBarItem({data, isChose, handleClick}) {
 
     useEffect(() => {
         if (data.sub !== undefined) {
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             item = data.sub.find(element => element.to === location.pathname);
         }
         
@@ -89,7 +90,6 @@ function SideBarItem({data, isChose, handleClick}) {
     }, [location])
 
 
-    console.log(subChose)
 
     const subRef = useRef(null);
 
@@ -105,12 +105,12 @@ function SideBarItem({data, isChose, handleClick}) {
         <div className={cx('sidebaritem-wrapper' , [isChose ? 'isChose': ''])} >
             {
                 data.sub === undefined ? (<div className={cx('sidebaritem-container')}> 
-                <div className={cx('sidebar-parent')}> 
-                    <Link to={data.to} className={cx('sidebaritem-info')}>
+                <Link to={data.to} className={cx('sidebar-parent')}> 
+                    <div className={cx('sidebaritem-info')}>
                         <FontAwesomeIcon icon={data.icon} className={cx('icon')} />
                         <span className={cx('sidebaritem-title')}>{data.title}</span>
-                    </Link>
-                </div>
+                    </div>
+                </Link>
                 
             </div>) : (<div className={cx('sidebaritem-container')} >
                 <div className={cx('sidebar-parent')} onClick= {() => {
