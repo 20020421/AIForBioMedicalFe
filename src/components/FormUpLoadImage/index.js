@@ -1,4 +1,4 @@
-import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 import { useRef, useState } from "react";
@@ -23,10 +23,9 @@ function FormUpLoadImage() {
     }
 
     return ( <div className={cx('wrapper')}>
-        <form>
+        <form className={cx([imagePreview !== '' ? 'hidden' : ''])}>
             <input ref={inputRef} id={cx("file-upload")}  style={{display: 'none'}} type='file' accept="image/*" onChange={handleOnChange}/>
             <label htmlFor='file-upload'>
-                <img id={cx('file-image')} src={imagePreview} alt="Preview"  className={cx([imagePreview === '' ? 'hidden' : ''])} />
                 <div className={cx("start", [imagePreview !== '' ? 'hidden' : ''])}>
                     <FontAwesomeIcon icon={faCloudArrowUp} className={cx('icon-upload')} />
                     <span>Select a file or drag here</span>
@@ -34,6 +33,12 @@ function FormUpLoadImage() {
                 </div>
             </label>
         </form>
+        <div id={cx('file-image')} className={cx([imagePreview === '' ? 'hidden' : ''])} >
+            <img  src={imagePreview} alt="Preview"  />
+            <FontAwesomeIcon onClick={() => {setImagePreview('')}} icon={faCircleXmark} className={cx('icon-close')}/>
+        </div>
+
+        
     </div> );
 }
 
