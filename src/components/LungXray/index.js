@@ -16,7 +16,7 @@ function LungXRay() {
 
             const response = await axios({
                 method: "post",
-                url: 'http://localhost:3001/',
+                url: url,
                 data: formData,
                 headers: {
                     "Content-Type": "multipart/form-data"

@@ -1,10 +1,8 @@
-import { faCircleXmark, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark, faCloudArrowUp, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from './FormUpLoadImage.module.scss';
-import axios from "axios";
-
 
 
 
@@ -17,6 +15,10 @@ function FormUpLoadImage({predict}) {
     const [selectedFile, setSelectedFile] = useState();
 
     const [predImage, setPredImage] = useState(null);
+
+    const [explain, setExplain] = useState(null);
+
+    const [isLoading, setIsLoading] = useState(false);
 
     // console.log(imagePreview)
 
@@ -34,10 +36,28 @@ function FormUpLoadImage({predict}) {
 
     const handleOnSubmit = async(event) => {
         event.preventDefault()
+
+        setIsLoading(true)
+
+
         const data = await predict(selectedFile);
-        // console.log(data);
-        setPredImage(data)
+        // console.log(data)
+
+        setIsLoading(false)
+        
+        setPredImage(data.image_base64.slice(2, data.image_base64.length - 1))
+        if (data.explain) {
+            let explainString = data.explain.slice(1, data.explain.length - 1).replace(/'/g, '')
+            setExplain(explainString.split(','))
+        }
+
     }
+
+    // console.log(predImage)
+
+    useEffect(() => {
+        console.log(isLoading)
+    }, [isLoading])
 
 
 
@@ -56,18 +76,40 @@ function FormUpLoadImage({predict}) {
         </form>
         <div id={cx('file-image')} className={cx([imagePreview === '' ? 'hidden' : ''])} >
             <img  src={imagePreview} alt="Preview"  />
-            <FontAwesomeIcon onClick={() => {setImagePreview('')}} icon={faCircleXmark} className={cx('icon-close')}/>
+            <FontAwesomeIcon onClick={() => {setImagePreview(''); setPredImage(null)}} icon={faCircleXmark} className={cx('icon-close')}/>
         </div>
 
-        <button onClick={handleOnSubmit} disabled={imagePreview === ''} className={cx('btn-pred')}>Predict</button>
+        <button onClick={handleOnSubmit} disabled={imagePreview === '' || isLoading} className={cx('btn-pred')}>Predict</button>
 
         {/* <img src={`data:image/jpeg;base64,${predImage}`} alt='pred' /> */}
+        {
+            predImage !== null && !isLoading && (<div className={cx('pred-value')}>
+                <img src={`data:image/jpeg;base64,${predImage}`} alt='pred' />
 
-        <div className={cx('pred-value')}>
-            { 
-                predImage !== null && (<img src={`data:image/jpeg;base64,${predImage}`} alt='pred' />)
-            }
-        </div>
+                {
+                    explain !== null && (
+                        <div className={cx('explain')}>
+                                    <p>Explain</p>
+                        {
+                            explain.map(( explainDetail, index) => (
+                                <p key={index}>{explainDetail}</p>
+                            ))
+                        }
+                        </div>
+                    )
+                }
+
+            </div>)
+        }
+
+        {
+            isLoading && (
+                <div className={cx('loading')}>
+                    <FontAwesomeIcon className={cx('icon-loading')} icon={faSpinner} />
+                </div>
+            )
+        }
+        
     
     </div> );
 }
