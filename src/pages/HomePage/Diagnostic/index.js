@@ -9,15 +9,15 @@ const cx = classNames.bind(style);
 const features = [
     {
         id: 1,
-        title: 'Chẩn đoán phổi',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tortor at risus viverra adipiscing at in. Ornare quam viverra orci sagittis eu. Sed vulputate odio ut enim blandit volutpat. Facilisis leo vel fringilla est ullamcorper eget. Vitae congue eu consequat ac felis donec.',
+        title: 'Lung Diagnostic',
+        description: '',
         symbol: faLungs,
         to: '/ai-for-biomedical-images/lung',
     },
     {
         id: 2,
-        title: 'Chẩn đoán xương',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tortor at risus viverra adipiscing at in. Ornare quam viverra orci sagittis eu. Sed vulputate odio ut enim blandit volutpat. Facilisis leo vel fringilla est ullamcorper eget. Vitae congue eu consequat onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tortor at risus viverra adipiscing at in. Ornare quam viverra orci sagittis eu. Sed vulputate odio ut enim blandit volutpat. Facilisis leo vel fringilla est ullamcorper eget. Vitae congue eu consequat ',
+        title: 'Bone Diagnostic',
+        description: '',
         symbol: faXRay,
         to: '/ai-for-biomedical-images/bone',
     }

@@ -149,7 +149,6 @@
     .pred-value {
         margin-top: 20px;
         width: 600px;
-        height: 100px;
         img {
             width: 100%;
             height: auto;
@@ -165,6 +164,27 @@
             height: 100%;
             animation: loading .5s infinite both;
             color: var(--primary);
+        }
+    }
+    .message {
+        margin-top: 20px;
+        p {
+            font-size: 3rem;
+            color: var(--primary);
+        }
+    }
+
+    .explain {
+        font-size: 2rem;
+        .title {
+            color: var(--primary);
+
+        }
+        .detail p:nth-child(odd) {
+            color: brown;
+        }
+        .detail p:nth-child(even) {
+            color: purple;
         }
     }
 }

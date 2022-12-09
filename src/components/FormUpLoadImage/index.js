@@ -10,7 +10,7 @@ const cx = classNames.bind(style);
 
 function FormUpLoadImage({predict}) {
 
-    const [imagePreview, setImagePreview] = useState('');
+    const [imagePreview, setImagePreview] = useState(null);
 
     const [selectedFile, setSelectedFile] = useState();
 
@@ -19,6 +19,10 @@ function FormUpLoadImage({predict}) {
     const [explain, setExplain] = useState(null);
 
     const [isLoading, setIsLoading] = useState(false);
+
+    const [message, setMessage] = useState('')
+
+    const resultRef = useRef(null)
 
     // console.log(imagePreview)
 
@@ -33,10 +37,13 @@ function FormUpLoadImage({predict}) {
 
         setSelectedFile(e.target.files[0])
     }
-
+    
     const handleOnSubmit = async(event) => {
         event.preventDefault()
-
+        
+        setMessage('')
+        setPredImage(null)
+        setExplain(null)
         setIsLoading(true)
 
 
@@ -44,28 +51,46 @@ function FormUpLoadImage({predict}) {
         // console.log(data)
 
         setIsLoading(false)
-        
-        setPredImage(data.image_base64.slice(2, data.image_base64.length - 1))
-        if (data.explain) {
-            let explainString = data.explain.slice(1, data.explain.length - 1).replace(/'/g, '')
-            setExplain(explainString.split(','))
+
+
+        if (data.code === '1') {
+            
+           setPredImage(data.image_base64.slice(2, data.image_base64.length - 1))
+           if (data.explain) {
+               let explainString = data.explain.slice(1, data.explain.length - 1).replace(/'/g, '')
+               setExplain(explainString.split(','))
+           }
+        } else {
+            setMessage(data.message);
         }
+        // resultRef.current.scrollIntoView();
+        console.log(resultRef.current.getBoundingClientRect().top);
+        window.scroll({
+            top: resultRef.current.getBoundingClientRect().top + window.scrollY + 300,
+            behavior: 'smooth'
+          });
 
     }
 
-    // console.log(predImage)
-
     useEffect(() => {
-        console.log(isLoading)
-    }, [isLoading])
+        console.log(window.scrollY)
+    })
 
+    const handleReset = () => {
+        setPredImage(null)
+        setImagePreview(null)
+        setSelectedFile(null)
+        setMessage('')
+        inputRef.current.value = null
+    }
+    // console.log(predImage
 
 
     return ( <div className={cx('wrapper')}>
-        <form className={cx([imagePreview !== '' ? 'hidden' : ''])}>
+        <form className={cx([imagePreview !== null ? 'hidden' : ''])}>
             <input ref={inputRef} id={cx("file-upload")}  style={{display: 'none'}} type='file' accept="image/*" onChange={handleOnChange}/>
             <label htmlFor='file-upload'>
-                <div className={cx("start", [imagePreview !== '' ? 'hidden' : ''])}>
+                <div className={cx("start", [imagePreview !== null ? 'hidden' : ''])}>
                     <FontAwesomeIcon icon={faCloudArrowUp} className={cx('icon-upload')} />
                     <span>Select a file or drag here</span>
                     <div className={cx('btn-select')}><span>Select a file</span></div>
@@ -74,13 +99,14 @@ function FormUpLoadImage({predict}) {
 
             {/* <input type="submit" value="Predict" /> */}
         </form>
-        <div id={cx('file-image')} className={cx([imagePreview === '' ? 'hidden' : ''])} >
+        <div id={cx('file-image')} className={cx([imagePreview === null ? 'hidden' : ''])} >
             <img  src={imagePreview} alt="Preview"  />
-            <FontAwesomeIcon onClick={() => {setImagePreview(''); setPredImage(null)}} icon={faCircleXmark} className={cx('icon-close')}/>
+            <FontAwesomeIcon onClick={handleReset} icon={faCircleXmark} className={cx('icon-close')}/>
         </div>
 
-        <button onClick={handleOnSubmit} disabled={imagePreview === '' || isLoading} className={cx('btn-pred')}>Predict</button>
+        <button onClick={handleOnSubmit} disabled={imagePreview === null || isLoading} className={cx('btn-pred')}>Predict</button>
 
+        <div ref={resultRef}>
         {/* <img src={`data:image/jpeg;base64,${predImage}`} alt='pred' /> */}
         {
             predImage !== null && !isLoading && (<div className={cx('pred-value')}>
@@ -89,17 +115,26 @@ function FormUpLoadImage({predict}) {
                 {
                     explain !== null && (
                         <div className={cx('explain')}>
-                                    <p>Explain</p>
-                        {
-                            explain.map(( explainDetail, index) => (
-                                <p key={index}>{explainDetail}</p>
-                            ))
-                        }
+                            <p className={cx('title')}>Explain</p>
+                            <div className={cx('detail')}>
+                                {
+                                    explain.map(( explainDetail, index) => (
+                                        <p key={index}>{explainDetail}</p>
+                                    ))
+                                }
+                            </div>
                         </div>
                     )
                 }
 
             </div>)
+        }
+        {
+            message !== '' && (
+                <div className={cx('message')}>
+                    <p>{message}</p>
+                </div>
+            )
         }
 
         {
@@ -109,6 +144,7 @@ function FormUpLoadImage({predict}) {
                 </div>
             )
         }
+        </div>
         
     
     </div> );
